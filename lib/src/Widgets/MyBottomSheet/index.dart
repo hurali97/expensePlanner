@@ -5,6 +5,8 @@ import 'package:expensePlanner/src/Widgets/TransparentButton/index.dart';
 import 'package:expensePlanner/src/Widgets/MyInputField/index.dart';
 
 class MyBottomSheet extends StatefulWidget {
+ 
+
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
@@ -13,11 +15,19 @@ class MyBottomSheet extends StatefulWidget {
 }
 
 class _MyBottomSheetState extends State<MyBottomSheet> {
-  String _title = "", _amount = '', _selectedDate = 'Select date';
+  String _title = "", _amount = '', _selectedDate = '';
+
+   @override
+  void initState() {
+    super.initState();
+
+    _selectedDate = 'Select date';
+  }
 
   _onChangeTitle(String text) {
     setState(() {
       _title = text;
+      _selectedDate = text;
     });
   }
 
@@ -27,7 +37,7 @@ class _MyBottomSheetState extends State<MyBottomSheet> {
     });
   }
 
-  Future<void> _onDatePressed() async {
+  Future<void> _onDatePressed(Function setState) async {
     final DateTime datePicked = await showDatePicker(
         context: context,
         initialDate: DateTime.now(),
@@ -46,18 +56,19 @@ class _MyBottomSheetState extends State<MyBottomSheet> {
   }
 
   _onCreate() {
-    this.setState(() {
-      this._selectedDate =  'Select a date';
-    });
+ 
   }
 
   _showPressed() {
+    
     showModalBottomSheet(
+      
         context: context,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(top: Radius.circular(20.0)),
         ),
-        builder: (BuildContext context) => Container(
+        builder: (BuildContext context)  => StatefulBuilder(
+          builder: (BuildContext context, setState) =>  Container(
               // color: Colors.grey[900],
               height: 450,
               child: Column(
@@ -92,15 +103,18 @@ class _MyBottomSheetState extends State<MyBottomSheet> {
                     icon: Icons.attach_money,
                     onChangeText: _onChangeAmount,
                   ),
-                  TransparentButton(this._onCreate, _selectedDate)
+                  TransparentButton(()=> _onDatePressed(setState), _selectedDate)
                   // MyInputField(),
                 ],
               ),
-            ));
+          ),
+            )
+            );
   }
 
   @override
   Widget build(BuildContext context) {
+   
     return FloatingActionButton(
       onPressed: _showPressed,
       tooltip: 'Increment',

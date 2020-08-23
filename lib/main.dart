@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
-import './src/Screens/HomeScreen/index.dart';
-import './src/Widgets/MyBottomSheet/index.dart';
+import './src/Screens/HomeScreen/index.dart'; 
 
 void main() {
   runApp(MyApp());
@@ -21,8 +20,7 @@ class MyApp extends StatelessWidget {
           appBar: AppBar(
             title: Text('Expense Planner'),
           ),
-          body: HomeScreen(),
-          floatingActionButton: MyBottomSheet(),
+          body: HomeScreen(), 
         ));
   }
 }
