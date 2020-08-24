@@ -16,7 +16,7 @@ class MyBottomSheet extends StatefulWidget {
 
 class _MyBottomSheetState extends State<MyBottomSheet> {
   String _title = "", _amount = '', _selectedDate = '';
-  var _bottomSheet;
+ 
 
   @override
   void initState() {
@@ -87,7 +87,7 @@ class _MyBottomSheetState extends State<MyBottomSheet> {
   }
 
   _showPressed() {
-    _bottomSheet = showModalBottomSheet(
+      showModalBottomSheet(
         context: context, 
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(top: Radius.circular(20.0)),
