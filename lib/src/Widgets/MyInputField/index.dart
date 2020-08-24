@@ -2,22 +2,29 @@ import 'package:flutter/material.dart';
 
 class MyInputField extends StatelessWidget {
   final String placeHolder, label;
+  final TextInputType keyboardType;
 
   final IconData icon;
   final Function onChangeText;
 
-
-  MyInputField({this.placeHolder, this.label, this.icon, this.onChangeText});
+  MyInputField({
+    this.placeHolder,
+    this.label,
+    this.icon,
+    this.onChangeText,
+    this.keyboardType = TextInputType.text,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Container(
       width: MediaQuery.of(context).size.width * 0.8,
       margin: EdgeInsets.symmetric(vertical: 10),
-      child: TextField( 
+      child: TextField(
         onChanged: (String value) {
           onChangeText(value);
         },
+        keyboardType: this.keyboardType,
         decoration: InputDecoration(
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.all(Radius.circular(30.0)),
@@ -28,11 +35,11 @@ class MyInputField extends StatelessWidget {
             borderSide: BorderSide(color: Colors.green[300]),
           ),
 
-          // border: OutlineInputBorder(),
+          // errorText: 'ohh',
           hintText: placeHolder,
           labelText: label,
           labelStyle: TextStyle(
-            color: Colors.green[300] ,
+            color: Colors.green[300],
           ),
           prefixIcon: Icon(
             icon,
@@ -40,7 +47,6 @@ class MyInputField extends StatelessWidget {
             color: Colors.green[300],
           ),
           contentPadding: EdgeInsets.all(0),
-          
         ),
       ),
     );
