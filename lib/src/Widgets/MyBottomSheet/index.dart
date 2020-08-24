@@ -16,6 +16,7 @@ class MyBottomSheet extends StatefulWidget {
 
 class _MyBottomSheetState extends State<MyBottomSheet> {
   String _title = "", _amount = '', _selectedDate = '';
+  var _bottomSheet;
 
   @override
   void initState() {
@@ -71,24 +72,27 @@ class _MyBottomSheetState extends State<MyBottomSheet> {
       _showToast("Enter title");
       return;
     } else if (_amount.trim() == '') {
-       _showToast("Enter amount");
+      _showToast("Enter amount");
       return;
     } else if (_selectedDate.trim() == '') {
-       _showToast("Select a date");
+      _showToast("Select a date");
       return;
     } else if (_selectedDate == 'Select date') {
-       _showToast("Select a date");
+      _showToast("Select a date");
       return;
+    }
+    else{
+    Navigator.pop(context);
     }
   }
 
   _showPressed() {
-    showModalBottomSheet(
-        context: context,
+    _bottomSheet = showModalBottomSheet(
+        context: context, 
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(top: Radius.circular(20.0)),
         ),
-        builder: (BuildContext context) => StatefulBuilder(
+        builder: (BuildContext context) => StatefulBuilder( 
               builder: (BuildContext context, setState) => Container(
                 // color: Colors.grey[900],
                 height: 450,
@@ -135,6 +139,7 @@ class _MyBottomSheetState extends State<MyBottomSheet> {
                 ),
               ),
             ));
+ 
   }
 
   @override
