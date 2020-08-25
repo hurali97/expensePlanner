@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 
 class MyCard extends StatelessWidget {
+  final String _date, _amount, _title;
+
+  MyCard(this._title, this._date, this._amount);
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -14,8 +18,20 @@ class MyCard extends StatelessWidget {
               Icons.monetization_on,
               size: 40,
             ),
-            title: Text('Monday'),
-            subtitle: Text("You made a transaction of \$40 in total."),
+            title: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              
+              children: <Widget>[
+                Text(this._title, style: TextStyle(fontSize: 18,color: Colors.grey[700])),
+                Text(this._date, style: TextStyle(fontSize: 10,color: Colors.grey[600]), ),
+              ],
+              
+            ),
+            subtitle:
+                Container(
+                  child: Text("You made a transaction of \$${this._amount} in total."),
+                  margin: EdgeInsets.only(top: 4),
+                )
           ),
           Align(
             alignment: Alignment.bottomRight,

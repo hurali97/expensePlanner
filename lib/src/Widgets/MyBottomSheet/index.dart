@@ -7,6 +7,10 @@ import 'package:expensePlanner/src/Widgets/MyInputField/index.dart';
 import 'package:expensePlanner/src/Widgets/MyButton/index.dart';
 
 class MyBottomSheet extends StatefulWidget {
+  final Function onCreateHandler;
+
+  MyBottomSheet(this.onCreateHandler);
+
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
@@ -16,7 +20,6 @@ class MyBottomSheet extends StatefulWidget {
 
 class _MyBottomSheetState extends State<MyBottomSheet> {
   String _title = "", _amount = '', _selectedDate = '';
- 
 
   @override
   void initState() {
@@ -67,7 +70,7 @@ class _MyBottomSheetState extends State<MyBottomSheet> {
     );
   }
 
-  _onCreate() {
+  _onCreate(Function setState) {
     if (_title.trim() == '') {
       _showToast("Enter title");
       return;
@@ -80,19 +83,27 @@ class _MyBottomSheetState extends State<MyBottomSheet> {
     } else if (_selectedDate == 'Select date') {
       _showToast("Select a date");
       return;
-    }
-    else{
-    Navigator.pop(context);
+    } else {
+      widget.onCreateHandler(_title, _amount, _selectedDate);
+
+      setState(() {
+        
+        _title = _amount = '';
+        _selectedDate = 'Select date';
+        
+      });
+
+      Navigator.pop(context);
     }
   }
 
   _showPressed() {
-      showModalBottomSheet(
-        context: context, 
+    showModalBottomSheet(
+        context: context,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(top: Radius.circular(20.0)),
         ),
-        builder: (BuildContext context) => StatefulBuilder( 
+        builder: (BuildContext context) => StatefulBuilder(
               builder: (BuildContext context, setState) => Container(
                 // color: Colors.grey[900],
                 height: 450,
@@ -133,13 +144,12 @@ class _MyBottomSheetState extends State<MyBottomSheet> {
                     ),
                     TransparentButton(
                         () => _onDatePressed(setState), _selectedDate),
-                    MyButton(_onCreate),
+                    MyButton(() => _onCreate(setState)),
                     // MyInputField(),
                   ],
                 ),
               ),
             ));
- 
   }
 
   @override

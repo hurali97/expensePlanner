@@ -9,16 +9,26 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  List<Map<String, String>> expenses;
 
-  String _selectedDate = 'Select date';
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
 
-  _onDateSelect(String text) {
+    expenses = [];
+  }
+
+  void _addExpense(String title, String amount, String date) {
     setState(() {
-      _selectedDate = text;
+      expenses.add({
+        'title': title,
+        'amount': amount,
+        'date': date,
+      });
     });
   }
 
-  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,12 +36,17 @@ class _HomeScreenState extends State<HomeScreen> {
       body: Column(
         children: <Widget>[
           Text('Transactions'),
-          MyCard(),
-          MyCard(),
-          MyCard(),
+
+          ...(expenses).map((_expense) {
+            return MyCard(
+                _expense['title'], _expense['date'], _expense['amount']);
+          }).toList()
+          // MyCard(),
+          // MyCard(),
+          // MyCard(),
         ],
       ),
-      floatingActionButton: MyBottomSheet(),
+      floatingActionButton: MyBottomSheet(_addExpense),
     );
   }
 }
