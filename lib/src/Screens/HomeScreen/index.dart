@@ -35,15 +35,23 @@ class _HomeScreenState extends State<HomeScreen> {
       resizeToAvoidBottomInset: true,
       body: Column(
         children: <Widget>[
-          Text('Transactions'),
+          // Text('Transactions'),
 
-          ...(expenses).map((_expense) {
-            return MyCard(
-                _expense['title'], _expense['date'], _expense['amount']);
-          }).toList()
-          // MyCard(),
-          // MyCard(),
-          // MyCard(),
+          expenses.length > 0
+              ? {
+                  ...(expenses).map((_expense) {
+                    return MyCard(_expense['title'], _expense['date'],
+                        _expense['amount']);
+                  }).toList()
+                }
+              : Container(
+                  child: Text(
+                    'No expenses added',
+                    textAlign: TextAlign.center,
+                  ),
+                  width: double.infinity,
+                  margin: EdgeInsets.only(top:10),
+                )
         ],
       ),
       floatingActionButton: MyBottomSheet(_addExpense),
