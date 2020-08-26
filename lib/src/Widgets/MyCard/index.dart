@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
 class MyCard extends StatelessWidget {
-  final String _date, _amount, _title;
+  final String _date, _amount, _title, _id;
+  final Function removeHandler;
 
-  MyCard(this._title, this._date, this._amount);
+  MyCard(this._title, this._date, this._amount, this._id, this.removeHandler);
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +41,7 @@ class MyCard extends StatelessWidget {
               icon: Icon(
                 Icons.delete,
               ),
-              onPressed: null,
+              onPressed: ()=>removeHandler(_id),
               tooltip: 'Delete transaction',
               splashColor: Colors.lime,
               enableFeedback: true,

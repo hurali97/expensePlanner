@@ -27,21 +27,19 @@ class _HomeScreenState extends State<HomeScreen> {
         'title': title,
         'amount': amount,
         'date': date,
+        'id': DateTime.now().millisecondsSinceEpoch.toString()
       });
+    });
+  }
+
+  void _removeExpense(String id) {
+    setState(() {
+      expenses.removeWhere((element) => element['id'] == id);
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    // var data = [
-    //   BarModel('2016', 12, Colors.red),
-    //   BarModel('2017', 42, Colors.yellow),
-    //   BarModel('2018', 62, Colors.green),
-    //   BarModel('2019', 72, Colors.red),
-    //   BarModel('2020', 22, Colors.yellow),
-    //   BarModel('2021', 92, Colors.green),
-    // ];
-
     List<BarModel> convertToArray() {
       List days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
       List colors = [
@@ -100,8 +98,8 @@ class _HomeScreenState extends State<HomeScreen> {
     List<Widget> _buildCards() {
       return [
         ...(expenses).map((_expense) {
-          return MyCard(
-              _expense['title'], _expense['date'], _expense['amount']);
+          return MyCard(_expense['title'], _expense['date'], _expense['amount'],
+              _expense['id'], _removeExpense);
         }).toList()
       ];
     }
@@ -109,14 +107,14 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       resizeToAvoidBottomInset: true,
       body: expenses.length > 0
-          ? SingleChildScrollView(child:Column(
+          ? SingleChildScrollView(
+              child: Column(
               children: [
                 // Text('Transactions'),
                 chartWidget,
                 ..._buildCards()
               ],
-            )
-          )
+            ))
           : Container(
               child: Text(
                 'No expenses added',
