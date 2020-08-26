@@ -116,12 +116,13 @@ class _HomeScreenState extends State<HomeScreen> {
               ],
             ))
           : Container(
-              child: Text(
-                'No expenses added',
-                textAlign: TextAlign.center,
-              ),
-              width: double.infinity,
-              margin: EdgeInsets.only(top: 10),
+              child: Center(
+                child: Text(
+                  'No expenses added',
+                  textAlign: TextAlign.center,
+                ),
+              ), 
+              // height: MediaQuery.of(context).size.height, 
             ),
       floatingActionButton: MyBottomSheet(_addExpense),
     );
