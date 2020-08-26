@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
+import 'package:lottie/lottie.dart';
 
 import '../../Widgets/MyCard/index.dart';
 import 'package:expensePlanner/src/Widgets/MyBottomSheet/index.dart';
@@ -117,12 +118,25 @@ class _HomeScreenState extends State<HomeScreen> {
             ))
           : Container(
               child: Center(
-                child: Text(
-                  'No expenses added',
-                  textAlign: TextAlign.center,
+                child: Column(
+                  children: <Widget>[
+                    Lottie.asset(
+                      'assets/lottieFiles/empty.json',
+                      fit: BoxFit.contain,
+                      // height: MediaQuery.of(context).size.height * 0.4,
+                      // width: MediaQuery.of(context).size.height * 0.4,
+                    ),
+                    Text(
+                      'No expense added',
+                      style: TextStyle(
+                        fontFamily: 'PTSans',
+                        fontSize: 22, 
+                      ),
+                    ),
+                  ],
                 ),
-              ), 
-              // height: MediaQuery.of(context).size.height, 
+              ),
+              // height: MediaQuery.of(context).size.height,
             ),
       floatingActionButton: MyBottomSheet(_addExpense),
     );

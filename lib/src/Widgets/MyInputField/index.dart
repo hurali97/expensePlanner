@@ -21,11 +21,15 @@ class MyInputField extends StatelessWidget {
       width: MediaQuery.of(context).size.width * 0.8,
       margin: EdgeInsets.symmetric(vertical: 10),
       child: TextField(
+          style: TextStyle(
+            fontFamily: 'PTSans', 
+          ),
         onChanged: (String value) {
           onChangeText(value);
         },
         keyboardType: this.keyboardType,
         decoration: InputDecoration(
+          
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.all(Radius.circular(30.0)),
             borderSide: BorderSide(color: Colors.green[300]),
@@ -34,12 +38,14 @@ class MyInputField extends StatelessWidget {
             borderRadius: BorderRadius.all(Radius.circular(30.0)),
             borderSide: BorderSide(color: Colors.green[300]),
           ),
-
+          
           // errorText: 'ohh',
           hintText: placeHolder,
+          hintStyle: TextStyle(fontFamily: 'PTSans'),
           labelText: label,
           labelStyle: TextStyle(
             color: Colors.green[300],
+            fontFamily: 'PTSans'
           ),
           prefixIcon: Icon(
             icon,

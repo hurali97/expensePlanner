@@ -113,6 +113,10 @@ class _MyBottomSheetState extends State<MyBottomSheet> {
                       child: Text(
                         'Add Transaction',
                         textAlign: TextAlign.center,
+                        style: TextStyle(
+                        fontFamily: 'PTSans',
+                        fontSize: 20, 
+                      ),
                       ),
                       padding: EdgeInsets.all(15),
                       margin: EdgeInsets.only(bottom: 10),

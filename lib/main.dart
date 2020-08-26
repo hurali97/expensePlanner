@@ -20,7 +20,12 @@ class MyApp extends StatelessWidget {
         home: Scaffold(
           appBar: AppBar(
             centerTitle: true,
-            title: Text('Expense Planner'),
+            title: Text(
+              'Expense Planner',
+              style: TextStyle(
+                fontFamily: 'PTSans',
+              ),
+            ),
           ),
           body: HomeScreen(),
         ));

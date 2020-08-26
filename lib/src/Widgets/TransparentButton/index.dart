@@ -8,11 +8,17 @@ class TransparentButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container( 
+    return Container(
       width: MediaQuery.of(context).size.width * 0.8,
       margin: EdgeInsets.symmetric(vertical: 10),
       child: OutlineButton(
-        child: Text(selectedDate),
+        child: Text(
+          selectedDate,
+          style: TextStyle(
+            fontFamily: 'PTSans',
+            fontSize: 16,
+          ),
+        ),
         onPressed: onPressHandler,
         borderSide: BorderSide(color: Colors.green[300]),
         padding: EdgeInsets.all(15),
