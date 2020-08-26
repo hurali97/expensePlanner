@@ -21,7 +21,7 @@ class MyCard extends StatelessWidget {
             title: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               
-              children: <Widget>[
+              children: [
                 Text(this._title, style: TextStyle(fontSize: 18,color: Colors.grey[700])),
                 Text(this._date, style: TextStyle(fontSize: 10,color: Colors.grey[600]), ),
               ],

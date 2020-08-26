@@ -55,7 +55,6 @@ class _HomeScreenState extends State<HomeScreen> {
     var chart = charts.BarChart(
       series,
       animate: true,
-     
     );
 
     var chartWidget = Padding(
@@ -66,30 +65,35 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
     );
 
+    List<Widget> _buildCards() {
+ 
+      return [
+       ...(expenses).map((_expense) {
+
+        return MyCard(_expense['title'], _expense['date'],
+            _expense['amount']);
+      }).toList()
+      ];
+    }
+
     return Scaffold(
       resizeToAvoidBottomInset: true,
-      body: Column(
-        children: <Widget>[
-          // Text('Transactions'),
-          chartWidget,
-
-          expenses.length > 0
-              ? {
-                  ...(expenses).map((_expense) {
-                    return MyCard(_expense['title'], _expense['date'],
-                        _expense['amount']);
-                  }).toList()
-                }
-              : Container(
-                  child: Text(
-                    'No expenses added',
-                    textAlign: TextAlign.center,
-                  ),
-                  width: double.infinity,
-                  margin: EdgeInsets.only(top: 10),
-                )
-        ],
-      ),
+      body: expenses.length > 0
+          ? Column(
+              children: [
+                // Text('Transactions'),
+                chartWidget,
+                ..._buildCards()
+              ],
+            )
+          : Container(
+              child: Text(
+                'No expenses added',
+                textAlign: TextAlign.center,
+              ),
+              width: double.infinity,
+              margin: EdgeInsets.only(top: 10),
+            ),
       floatingActionButton: MyBottomSheet(_addExpense),
     );
   }
